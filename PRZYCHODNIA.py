@@ -52,7 +52,7 @@ class PrzychodniaController:
     def pokazPrzychodnie(self):
         for i in self.listaPrzychodni:
             print(f"Nazwa: {i.nazwa} \nMiasto: {i.miasto}")
-            break
+
 
     def listaPacjentowWPrzychodni(self, nazwa):
         for i in self.listaPrzychodni:
@@ -110,8 +110,8 @@ class Nfz(PrzychodniaController):
             if(menu == "1"):
 
                 while(True):
-                    submenu = input("1 - Dodaj przychodnie, 2 - Usuń przychodnie, 3 - Lista przychodni, "
-                                    "6 - Lista pacjentow w przychodni, 7 - Wstecz")
+                    submenu = input("1 - Dodaj przychodnie, 2 - Usuń przychodnie, 3 - Lista przychodni, \n"
+                                    " 4 - Lista pacjentow w przychodni, 5 - Wstecz")
 
                     if(submenu == "1"):
                         nazwa = input("Podaj nazwe przychodni: ")
@@ -150,14 +150,14 @@ class Nfz(PrzychodniaController):
                     elif (submenu == "3"):
                         self.pokazPrzychodnie()
 
-                    elif (submenu == "6"):
-                        nazwa = input("Podaj nazwe:")
+                    elif (submenu == "4"):
+                        nazwa = input("Podaj nazwe przychodni: ")
                         if (self.sprawdzPrzychodnie(nazwa) == True):
                             self.listaPacjentowWPrzychodni(nazwa)
                         else:
                             print("Bledna nazwa przychodni.")
 
-                    elif (submenu == "7"):
+                    elif (submenu == "5"):
                         break
                     else:
                         break
@@ -229,4 +229,4 @@ class Nfz(PrzychodniaController):
 
 ob = Nfz()
 
-# pozmieniac punkty w menu przychodnie, skonczyc edycje w punkcie 2 - pacjenci!
+# kazdy wiersz sprawdzic, skonczyc edycje w punkcie 2 - pacjenci!
