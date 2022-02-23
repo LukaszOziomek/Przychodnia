@@ -49,7 +49,7 @@ class PrzychodniaController:
                         print(f"Pomyślnie usunieto pacjenta {nazwisko} z przychodni {nazwa}.")
                         break
 
-    def pokazPrzychodne(self):
+    def pokazPrzychodnie(self):
         for i in self.listaPrzychodni:
             print(f"Nazwa: {i.nazwa} \nMiasto: {i.miasto}")
             break
@@ -110,8 +110,8 @@ class Nfz(PrzychodniaController):
             if(menu == "1"):
 
                 while(True):
-                    submenu = input("1 - Dodaj przychodnie, 2 - Usuń przychodnie, 3 - Dodaj pacjenta do przychodni, "
-                                "\n4 - Usuń pacjenta z przychodni, 5 - Lista przychodni, 6 - Lista pacjentow w przychodni, 7 - Wstecz")
+                    submenu = input("1 - Dodaj przychodnie, 2 - Usuń przychodnie, 3 - Lista przychodni, "
+                                    "6 - Lista pacjentow w przychodni, 7 - Wstecz")
 
                     if(submenu == "1"):
                         nazwa = input("Podaj nazwe przychodni: ")
@@ -136,26 +136,26 @@ class Nfz(PrzychodniaController):
                     #     else:
                     #         print("Bledna nazwa przychodni")
 
-                    elif (submenu == "4"):
-                        nazwa = input("Podaj nazwe:")
-                        if (self.sprawdzPrzychodnie(nazwa) == True):
-                            nazwisko = input("Podaj nazwisko pacjenta")
-                            if(self.sprawdzPacjenta(nazwisko) == True):
-                                self.usunPacjentaZPrzychodni(nazwa, nazwisko)
-                            else:
-                                print("Brak pacjenta")
-                        else:
-                            print("Bledna nazwa przychodni")
+                    # elif (submenu == "4"):
+                    #     nazwa = input("Podaj nazwe:")
+                    #     if (self.sprawdzPrzychodnie(nazwa) == True):
+                    #         nazwisko = input("Podaj nazwisko pacjenta")
+                    #         if(self.sprawdzPacjenta(nazwisko) == True):
+                    #             self.usunPacjentaZPrzychodni(nazwa, nazwisko)
+                    #         else:
+                    #             print("Brak pacjenta")
+                    #     else:
+                    #         print("Bledna nazwa przychodni")
 
-                    elif (submenu == "5"):
-                        self.pokazPrzychodne()
+                    elif (submenu == "3"):
+                        self.pokazPrzychodnie()
 
                     elif (submenu == "6"):
                         nazwa = input("Podaj nazwe:")
                         if (self.sprawdzPrzychodnie(nazwa) == True):
                             self.listaPacjentowWPrzychodni(nazwa)
                         else:
-                            print("Bledna nazwa przychodni")
+                            print("Bledna nazwa przychodni.")
 
                     elif (submenu == "7"):
                         break
@@ -166,7 +166,8 @@ class Nfz(PrzychodniaController):
             elif(menu == "2"):
 
                 while (True):
-                    submenu = input("1 - Dodaj pacjenta do przychodni, 2 - Usuń pacjenta z przychodni, \n3 - Dodaj chorobę pacjentowi, 4 - Lista chorób pacjenta, 5 - Wstecz")
+                    submenu = input("1 - Dodaj pacjenta do przychodni, 2 - Usuń pacjenta z przychodni, \n"
+                                    "3 - Dodaj chorobę pacjentowi, 4 - Lista chorób pacjenta, 5 - Wstecz")
                     if(submenu == "1"):
                         nazwa = input("Do której przychodni dodać pacjenta: ")
                         if (self.sprawdzPrzychodnie(nazwa) == True):
@@ -204,15 +205,15 @@ class Nfz(PrzychodniaController):
                             print("Bledna nazwa przychodni")
 
                     elif (submenu == "4"):
-                        nazwa = input("Podaj nazwe przychodni:")
+                        nazwa = input("Podaj nazwe przychodni: ")
                         if (self.sprawdzPrzychodnie(nazwa) == True):
                             nazwisko = input("Podaj nazwisko pacjenta:")
                             if (self.sprawdzPacjenta(nazwa, nazwisko) == True):
                                 self.listaChorobPacjenta(nazwa, nazwisko)
                             else:
-                                print(f"Brak pacjenta {nazwa} w przychodni")
+                                print(f"Brak pacjenta {nazwa} w przychodni.")
                         else:
-                            print("Bledna nazwa przychodni")
+                            print("Bledna nazwa przychodni.")
 
                     elif (submenu == "5"):
                         break
