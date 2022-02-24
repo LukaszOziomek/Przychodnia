@@ -25,20 +25,22 @@ class PrzychodniaController:
         self.listaPrzychodni.append(przychodnia)
         print(f"Przychodnia: {nazwa}, w mieście: {miasto} została dodana pomyslnie!")
 
+
     def usunPrzychodnie(self, nazwa):
         for i in self.listaPrzychodni:
             if(i.nazwa == nazwa):
                 self.listaPrzychodni.remove(i)
                 print(f"Przychodnia: {nazwa} została pomyslnie usunieta!")
-                break
+                pass
+
 
     def dodajPacjentaDoPrzychodni(self, nazwa, imie, nazwisko):
         for i in self.listaPrzychodni:
             if(i.nazwa == nazwa):
                 pacjent = Pacjent(imie, nazwisko)
                 i.listaPacjentow.append(pacjent)
-                print(f"Pomyślnie dodano pacjenta {nazwisko} do przychodni {nazwa}.")
-                break
+                print(f"Pomyślnie dodano pacjenta: {imie}, {nazwisko} do przychodni {nazwa}.")
+
 
     def usunPacjentaZPrzychodni(self, nazwa, nazwisko):
         for i in self.listaPrzychodni:
@@ -47,11 +49,11 @@ class PrzychodniaController:
                     if(j.nazwisko == nazwisko):
                         i.listaPacjentow.remove(j)
                         print(f"Pomyślnie usunieto pacjenta {nazwisko} z przychodni {nazwa}.")
-                        break
+
 
     def pokazPrzychodnie(self):
         for i in self.listaPrzychodni:
-            print(f"Nazwa: {i.nazwa} \nMiasto: {i.miasto}")
+            print(f"Nazwa przychodni: {i.nazwa} Miasto: {i.miasto}")
 
 
     def listaPacjentowWPrzychodni(self, nazwa):
@@ -65,9 +67,10 @@ class PrzychodniaController:
             if (i.nazwa == nazwa):
                 for j in i.listaPacjentow:
                     if (j.nazwisko == nazwisko):
+                        choroba = Pacjent(nazwisko, choroba)
                         j.listaChorob.append(choroba)
-                        print(f"Choroba zostala dodana dla pacjenta {i.nazwa}")
-                        break
+                        print(f"Choroba {choroba} zostala dodana dla pacjenta {i.nazwa}.")
+
 
     def listaChorobPacjenta(self, nazwa, nazwisko):
         for i in self.listaPrzychodni:
@@ -75,7 +78,7 @@ class PrzychodniaController:
                 for j in i.listaPacjentow:
                     if (j.nazwisko == nazwisko):
                         for k in j.listaChorob:
-                            print(k)
+                            print(f"Choroby pacjenta {nazwisko}: {k}.")
 
     def sprawdzPrzychodnie(self, nazwa):
         for i in self.listaPrzychodni:
@@ -89,6 +92,7 @@ class PrzychodniaController:
             if (i.nazwa == nazwa):
                 for j in i.listaPacjentow:
                     if(j.nazwisko == nazwisko):
+                        i.listaPacjentow.remove(j)
                         return True
 
         return False
@@ -105,7 +109,7 @@ class Nfz(PrzychodniaController):
         while(True):
             print("----- WITAJ W NFZ! -----"
                   "\n ----- PROSZĘ WYBRAĆ OPCJE ----")
-            menu = input("1 - Przychodnie, 2 - Pacjenci, 3 - Koniec edycji")
+            menu = input("1 - PRZYCHODNIE, 2 - PACJENCI, 3 - KONIEC EDYCJI")
 
             if(menu == "1"):
 
@@ -123,10 +127,10 @@ class Nfz(PrzychodniaController):
                         nazwa = input("Podaj nazwe przychodni: ")
                         if(self.sprawdzPrzychodnie(nazwa) == True):
                             self.usunPrzychodnie(nazwa)
-                            break
+
                         else:
                             print("Blędna nazwa przychodni!")
-                            break
+
                     # elif (submenu == "3"):
                     #     nazwa = input("Podaj nazwe:")
                     #     if (self.sprawdzPrzychodnie(nazwa) == True):
@@ -174,46 +178,47 @@ class Nfz(PrzychodniaController):
                             imie = input("Podaj imię pacjenta: ")
                             nazwisko = input("Podaj nazwisko pacjenta: ")
                             self.dodajPacjentaDoPrzychodni(nazwa, imie, nazwisko)
-                            break
+
                         else:
                             print("Błędna nazwa przychodni!")
-                            break
+
 
                     elif (submenu == "2"):
                         nazwa = input("Podaj nazwe przychodni z której usuwamy pacjenta: ")
                         if(self.sprawdzPrzychodnie(nazwa) == True):
                             nazwisko = input("Podaj nazwisko pacjenta: ")
-                            if(self.sprawdzPacjenta(nazwisko) == True):
+                            if(self.sprawdzPacjenta(nazwa, nazwisko) == True):
                                 self.usunPacjentaZPrzychodni(nazwa, nazwisko)
+
                             else:
-                                print("Podano błędne nazwisko!")
-                                break
+                                print("Podano błędne nazwisko pacjenta!")
+
                         else:
                             print("Podano błędne nazwisko pacjenta!")
-                            break
+
 
                     elif (submenu == "3"):
-                        nazwa = input("Podaj nazwe:")
+                        nazwa = input("Podaj nazwe przychodni danego pacjenta: ")
                         if (self.sprawdzPrzychodnie(nazwa) == True):
-                            nazwisko = input("Podaj nazwisko pacjenta:")
+                            nazwisko = input("Podaj nazwisko pacjenta: ")
                             if(self.sprawdzPacjenta(nazwa, nazwisko) == True):
-                                choroba = input("Podaj chorobe:")
+                                choroba = input("Podaj chorobe: ")
                                 self.dodajChorobePacjentowi(nazwa, nazwisko, choroba)
                             else:
-                                print("Brak pacjenta w przychodnia")
+                                print("Brak pacjenta w przychodni!")
                         else:
-                            print("Bledna nazwa przychodni")
+                            print("Bledna nazwa przychodni!")
 
                     elif (submenu == "4"):
-                        nazwa = input("Podaj nazwe przychodni: ")
+                        nazwa = input("Podaj nazwe przychodni danego pacjenta: ")
                         if (self.sprawdzPrzychodnie(nazwa) == True):
-                            nazwisko = input("Podaj nazwisko pacjenta:")
+                            nazwisko = input("Podaj nazwisko pacjenta: ")
                             if (self.sprawdzPacjenta(nazwa, nazwisko) == True):
                                 self.listaChorobPacjenta(nazwa, nazwisko)
                             else:
-                                print(f"Brak pacjenta {nazwa} w przychodni.")
+                                print(f"Brak pacjenta {nazwisko} w przychodni!")
                         else:
-                            print("Bledna nazwa przychodni.")
+                            print("Bledna nazwa przychodni!")
 
                     elif (submenu == "5"):
                         break
@@ -228,5 +233,3 @@ class Nfz(PrzychodniaController):
 
 
 ob = Nfz()
-
-# kazdy wiersz sprawdzic, skonczyc edycje w punkcie 2 - pacjenci!
