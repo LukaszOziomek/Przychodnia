@@ -67,9 +67,8 @@ class PrzychodniaController:
             if (i.nazwa == nazwa):
                 for j in i.listaPacjentow:
                     if (j.nazwisko == nazwisko):
-                        choroba = Pacjent(nazwisko, choroba)
                         j.listaChorob.append(choroba)
-                        print(f"Choroba {choroba} zostala dodana dla pacjenta {i.nazwa}.")
+                        print(f"Choroba: {choroba}, zostala dodana dla pacjenta {nazwisko}.")
 
 
     def listaChorobPacjenta(self, nazwa, nazwisko):
@@ -92,7 +91,6 @@ class PrzychodniaController:
             if (i.nazwa == nazwa):
                 for j in i.listaPacjentow:
                     if(j.nazwisko == nazwisko):
-                        i.listaPacjentow.remove(j)
                         return True
 
         return False
@@ -130,26 +128,6 @@ class Nfz(PrzychodniaController):
 
                         else:
                             print("Blędna nazwa przychodni!")
-
-                    # elif (submenu == "3"):
-                    #     nazwa = input("Podaj nazwe:")
-                    #     if (self.sprawdzPrzychodnie(nazwa) == True):
-                    #         imie = input("Podaj imie pacjenta")
-                    #         nazwisko = input("Podaj nazwisko pacjenta")
-                    #         self.dodajPacjentaDoPrzychodni(nazwa, imie, nazwisko)
-                    #     else:
-                    #         print("Bledna nazwa przychodni")
-
-                    # elif (submenu == "4"):
-                    #     nazwa = input("Podaj nazwe:")
-                    #     if (self.sprawdzPrzychodnie(nazwa) == True):
-                    #         nazwisko = input("Podaj nazwisko pacjenta")
-                    #         if(self.sprawdzPacjenta(nazwisko) == True):
-                    #             self.usunPacjentaZPrzychodni(nazwa, nazwisko)
-                    #         else:
-                    #             print("Brak pacjenta")
-                    #     else:
-                    #         print("Bledna nazwa przychodni")
 
                     elif (submenu == "3"):
                         self.pokazPrzychodnie()
@@ -233,5 +211,3 @@ class Nfz(PrzychodniaController):
 
 
 ob = Nfz()
-
-# pacjent - dodaj / lista chorób EDYTOWAC
