@@ -233,3 +233,5 @@ class Nfz(PrzychodniaController):
 
 
 ob = Nfz()
+
+# pacjent - dodaj / lista chorób EDYTOWAC
